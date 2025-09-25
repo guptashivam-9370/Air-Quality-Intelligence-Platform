@@ -18,7 +18,13 @@ const TEAM_MEMBERS = [
     rollNumber: "220107099",
     email: "shivamgupta@iitg.ac.in",
     photo: "/images/i3.jpeg" // Updated photo path
-  }
+  },
+  {
+    name: "Sudhanshu Raj",
+    rollNumber: "220107085",
+    email: "r.sudhanshu@iitg.ac.in",
+    photo: "/images/i2.jpeg" // Updated photo path
+  },
 ];
 
 function AboutUsPage() {
