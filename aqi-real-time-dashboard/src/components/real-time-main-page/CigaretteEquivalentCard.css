@@ -1,0 +1,133 @@
+/* Base styles for the card */
+.cigarette-equivalent-card {
+    background-color: #c1c5c9;
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  /* Dark mode styles */
+  .dark-mode .cigarette-equivalent-card {
+    background-color: #15283b;
+  }
+  
+  /* Card content layout */
+  .card-content {
+    width: 100%;
+  }
+  
+  /* Stats container */
+  .stats-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Daily stats */
+  .daily-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .daily-count {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #f56565;
+  }
+  
+  .daily-label {
+    font-size: 1rem;
+    color: #f56565;
+  }
+  
+  /* Cigarette icon container */
+  .cigarette-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  /* Weekly and monthly stats */
+  .weekly-stats, .monthly-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .period-label {
+    font-size: 1.2rem;
+  }
+  
+  .period-count {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f56565;
+  }
+  
+  .period-unit {
+    font-size: 1rem;
+    color: #f56565;
+  }
+  
+  /* Card footer */
+  .card-footer {
+    margin-top: 20px;
+  }
+  
+  .info-text {
+    margin-bottom: 10px;
+  }
+  
+  /* Source information */
+  .source-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .source-label {
+    margin-right: 10px;
+  }
+  
+  .source-name {
+    color: #9CA3AF;
+  }
+  
+  /* Info icon and tooltip */
+  .info-icon {
+    margin-left: 8px;
+    border: 1px solid #9CA3AF;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    width: 110px;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  /* Dark mode specific overrides */
+  .dark-mode .tooltip {
+    background-color: #1a1a1a;
+  }

@@ -1,0 +1,92 @@
+.city-stations-table-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: white;
+  /* Adjust for dark/light mode */
+  border-radius: 16px;
+}
+
+.table-heading {
+  color: #151313;
+  /* Adjust for dark/light mode */
+  margin-bottom: 1rem;
+}
+
+.city-stations-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.city-stations-table thead {
+  background-color: white;
+
+}
+
+.city-stations-table th {
+  color: black;
+  font-weight: 600;
+  padding: 12px 8px;
+  text-align: left;
+}
+
+.city-stations-table tbody tr {
+  background-color: white;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.city-stations-table td {
+  padding: 12px 8px;
+  color: black;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.spinner {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.city-stations-table tr:hover {
+  background-color: #bfc8db;
+  /* row highlight */
+}
+
+.dark-mode .city-stations-table-container {
+  background-color: #203452;
+  color: white
+}
+
+
+.dark-mode .table-heading {
+  color: #fff;
+}
+
+.dark-mode .city-stations-table tbody tr {
+  background-color: #203452;
+}
+
+.dark-mode .city-stations-table thead {
+  background-color: #203452;
+
+}
+
+.dark-mode .city-stations-table td {
+  color: white;
+
+}
+
+.dark-mode .city-stations-table th {
+  color: white;
+
+}

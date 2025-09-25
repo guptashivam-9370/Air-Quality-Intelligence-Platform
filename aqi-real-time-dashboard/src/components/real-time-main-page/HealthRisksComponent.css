@@ -1,0 +1,241 @@
+/* ---------- Default Light Mode Styles ---------- */
+
+.health-risks-container {
+  background-color: #f8fafc;
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  color: #1e293b;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.health-risks-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+
+.health-risks-location {
+  font-size: 16px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.condition-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+
+.condition-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 50px;
+  border: 1px solid #334155;
+  background-color: #f8fafc;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.condition-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.condition-button:hover {
+  background-color: #e2e8f0;
+}
+
+.condition-button.selected {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.health-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+}
+
+.health-image-container {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #f8f3e0 !important; */
+}
+
+.risk-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  background-color: #ff7e00; /* For "Mid" level */
+  color: #fff;
+}
+
+.health-info-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+}
+
+.condition-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1e293b;
+}
+
+.condition-risk {
+  font-size: 16px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.risk-label {
+  color: #1e293b;
+}
+
+.risk-level {
+  font-weight: 700;
+  color: #ff7e00; /* For the "Mid" level shown in the image */
+}
+
+.condition-description {
+  color: #1e293b;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.recommendations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.dos h4,
+.donts h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1e293b;
+}
+
+.dos ul,
+.donts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.do-item,
+.dont-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.5;
+  color: #1e293b;
+}
+
+.check-icon {
+  color: #22c55e;
+  font-weight: 700;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.x-icon {
+  color: #ef4444;
+  font-weight: 700;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .health-content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .recommendations {
+    grid-template-columns: 1fr;
+  }
+  
+  .condition-buttons {
+    justify-content: center;
+  }
+}
+
+/* ---------- Dark Mode Overrides using .dark-mode ---------- */
+
+.dark-mode .health-risks-container {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+.dark-mode .health-risks-title {
+  color: #e2e8f0;
+}
+
+.dark-mode .health-risks-location {
+  color: #cbd5e1;
+}
+
+.dark-mode .condition-button {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+
+.dark-mode .condition-button:hover {
+  background-color: #334155;
+}
+
+.dark-mode .condition-button.selected {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.dark-mode .health-info-container {
+  background-color: #273548;
+}
+
+.dark-mode .condition-title {
+  color: #e2e8f0;
+}
+
+.dark-mode .condition-risk,
+.dark-mode .risk-label,
+.dark-mode .condition-description,
+.dark-mode .do-item,
+.dark-mode .dont-item {
+  color: #cbd5e1;
+}
+
+.dark-mode .dos h4,
+.dark-mode .donts h4 {
+  color: #e2e8f0;
+}

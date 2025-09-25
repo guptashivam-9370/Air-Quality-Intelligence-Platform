@@ -1,0 +1,191 @@
+/* Component2.css */
+
+/* Container for the entire component */
+.component2 {
+    background-color: #fff;
+    color: #0b0a0a;
+    padding: 2rem;
+    width: 100%;
+    margin: 0 auto;
+    font-family: sans-serif; /* or your preferred font */
+  }
+  
+  /* Main title */
+  .component2 .title {
+    font-size: 2.25rem; /* ~ text-4xl in Tailwind */
+    font-weight: 700;   /* bold */
+    margin-bottom: 1.5rem; /* ~ mb-6 */
+  }
+  
+  /* Flex container for the two main boxes (PM2.5 box & Death box) */
+  .component2 .boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* ~ gap-4 */
+    margin-bottom: 2rem; /* ~ mb-8 */
+  }
+  
+  /* Make them side by side on medium+ screens */
+  @media (min-width: 768px) {
+    .component2 .boxes {
+      flex-direction: row;
+    }
+  }
+  
+  /* ====== PM2.5 Levels Box ====== */
+  .component2 .box-red {
+    background-color: #ef4444; /* ~ Tailwind red-500 */
+    padding: 1.5rem; /* ~ p-6 */
+    border-radius: 0.375rem; /* ~ rounded-md */
+    flex: 1;
+  }
+  
+  /* General text styles in the box */
+  .component2 .box-red p {
+    margin: 0;
+  }
+  
+  /* Slightly bigger text (like Tailwind .text-xl) */
+  .component2 .box-red .text-xl {
+    font-size: 1.25rem;
+    font-weight: 400; /* normal weight */
+  }
+  
+  /* Margin top utility (like .mt-4) */
+  .component2 .box-red .mt-4 {
+    margin-top: 1rem;
+  }
+  
+  /* Very large text (like .text-8xl ~ 6rem) */
+  .component2 .box-red .text-8xl {
+    font-size: 6rem;
+    font-weight: 700; /* bold */
+    margin: 0; /* remove default p margin */
+  }
+  
+  /* text-lg ~ 1.125rem */
+  .component2 .box-red .text-lg {
+    font-size: 1.125rem;
+  }
+  
+  /* Margin top utility (like .mt-1) */
+  .component2 .box-red .mt-1 {
+    margin-top: 0.25rem;
+  }
+  
+  /* ====== Deaths Box ====== */
+  .component2 .box-death {
+    background-color: #000;
+    border: 1px solid #ef4444; /* ~ border-red-500 */
+    padding: 1.5rem; /* ~ p-6 */
+    border-radius: 0.375rem; /* ~ rounded-md */
+    flex: 1;
+  }
+  
+  /* Utility classes for alignment and spacing */
+  .component2 .box-death .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .component2 .box-death .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .component2 .box-death .mr-4 {
+    margin-right: 1rem;
+  }
+  
+  /* Big red number (70) */
+  .component2 .box-death .text-8xl {
+    font-size: 6rem;
+    font-weight: 700;
+    color: #ef4444;
+    margin: 0; /* remove default p margin */
+  }
+  
+  /* Title under the number (Deaths per 100,000) */
+  .component2 .box-death .text-3xl {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    color: #ef4444;
+  }
+  
+  /* Light gray text (like Tailwind .text-gray-300) */
+  .component2 .box-death .text-gray-300 {
+    color: #d1d5db;
+    margin-top: 1rem;
+  }
+  
+  /* ====== Diseases Section ====== */
+  .component2 .subtitle {
+    font-size: 1.25rem; /* ~ text-xl */
+    font-weight: 700;   /* bold */
+    margin-bottom: 1.5rem; /* ~ mb-6 */
+  }
+  
+  /* Disease list container */
+  .component2 .disease-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* ~ space-y-4 */
+  }
+  
+  /* Each disease row */
+  .component2 .disease-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Icon area (like .w-12) */
+  .component2 .disease-item .icon {
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Disease name (like .w-64) */
+  .component2 .disease-item .name {
+    width: 16rem;
+  }
+  
+  .component2 .disease-item .name p {
+    font-size: 0.875rem; /* ~ text-sm */
+    margin: 0;
+  }
+  
+  /* Progress bar area */
+  .component2 .disease-item .progress {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  /* The red bar itself */
+  .component2 .disease-item .progress-bar {
+    height: 1.5rem; /* ~ h-6 */
+    background-color: #ef4444;
+    border-radius: 0.125rem; /* ~ rounded-sm */
+  }
+  
+  /* The percentage text to the right of the bar */
+  .component2 .disease-item .percentage {
+    margin-left: 1rem; /* ~ ml-4 */
+    font-size: 1.5rem; /* ~ text-2xl */
+    font-weight: 700;  /* bold */
+  }
+  
+  /* Source note at the bottom */
+  .component2 .source {
+    margin-top: 2rem; /* ~ mt-8 */
+    text-align: right; /* ~ text-right */
+    font-size: 0.875rem; /* ~ text-sm */
+    color: #9ca3af; /* ~ text-gray-400 */
+  }
+  
+
+  .dark-mode .component2{
+    background-color: #1a1d23;
+    color:#fff
+  }

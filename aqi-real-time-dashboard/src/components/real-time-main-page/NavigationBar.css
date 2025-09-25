@@ -1,0 +1,69 @@
+:root {
+    /* Light theme (default) */
+    --nav-bg: #ffffff;
+    --nav-item-bg: #f0f0f0;
+    --nav-item-color: #000000;
+    --nav-item-hover: #e0e0e0;
+    --nav-item-active-bg: #3498db;
+    --nav-item-active-color: #ffffff;
+}
+
+.dark-theme {
+    --nav-bg: #111111;
+    --nav-item-bg: #222222;
+    --nav-item-color: #ffffff;
+    --nav-item-hover: #333333;
+    --nav-item-active-bg: #3498db;
+    --nav-item-active-color: #ffffff;
+}
+
+.navigation-bar {
+    background-color: var(--nav-bg);
+    padding: 15px 0;
+    width: 100%;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.nav-item {
+    background-color: var(--nav-item-bg);
+    color: var(--nav-item-color);
+    border-radius: 20px;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: var(--nav-item-hover);
+}
+
+.nav-item.active {
+    background-color: var(--nav-item-active-bg);
+    color: var(--nav-item-active-color);
+}
+
+.dark-mode {
+    --nav-bg: #1f2937;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        gap: 8px;
+    }
+
+    .nav-item {
+        padding: 6px 15px;
+        font-size: 14px;
+    }
+}

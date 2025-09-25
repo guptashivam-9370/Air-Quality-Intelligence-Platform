@@ -1,0 +1,285 @@
+/* AboutUs.css */
+
+.about-us-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+  
+  /* Light mode variables */
+  :root {
+    --bg-color: #f8f9fa;
+    --text-color: #333;
+    --heading-color: #1a73e8;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --border-color: #e0e0e0;
+    --highlight-color: #4285f4;
+  }
+  
+  /* Dark mode variables */
+  .dark-mode {
+    /* --bg-color: #1a1a1a; */
+    --text-color: #f0f0f0;
+    --heading-color: #4db6ac;
+    --card-bg: #2d2d2d;
+    --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --border-color: #444;
+    --highlight-color: #64ffda;
+  }
+  
+  body {
+    /* background-color: var(--bg-color); */
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Heading styles */
+  h1, h2, h3, h4 {
+    color: var(--heading-color);
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--highlight-color);
+    border-radius: 2px;
+  }
+  
+  /* About section */
+  .about-section {
+    margin-bottom: 60px;
+  }
+  
+  .project-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+  }
+  
+  /* Feature list */
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+  }
+  
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .feature-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .clickable-feature {
+    cursor: pointer;
+    position: relative;
+    padding-right: 40px !important;
+  }
+  
+  .clickable-feature:hover {
+    background-color: rgba(66, 133, 244, 0.05);
+  }
+  
+  .feature-arrow {
+    position: absolute;
+    right: 20px;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    color: var(--highlight-color);
+  }
+  
+  .clickable-feature:hover .feature-arrow {
+    opacity: 1;
+    transform: translateX(5px);
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(66, 133, 244, 0.1);
+  }
+  
+  .feature-details {
+    flex: 1;
+  }
+  
+  .feature-details h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+  }
+  
+  .feature-details p {
+    margin: 0;
+    color: var(--text-color);
+  }
+  
+  /* Team section */
+  .team-section {
+    margin-bottom: 60px;
+  }
+  
+  .team-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .team-member-card {
+    flex: 0 0 300px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s;
+  }
+  
+  .team-member-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .member-photo {
+    height: auto;
+    max-height: 250px;
+    overflow: hidden;
+    border-bottom: 3px solid var(--highlight-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .member-photo img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 230px;
+    object-fit: contain;
+    transition: transform 0.5s;
+  }
+  
+  .team-member-card:hover .member-photo img {
+    transform: scale(1.05);
+  }
+  
+  .member-info {
+    padding: 20px;
+  }
+  
+  .member-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+  }
+  
+  .member-info p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+  }
+  
+  /* Faculty section */
+  .faculty-section {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .faculty-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .course-info h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+  }
+  
+  .instructor-info, .ta-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(66, 133, 244, 0.05);
+    border-left: 4px solid var(--highlight-color);
+  }
+  
+  .instructor-info h4, .ta-info h4 {
+    margin: 0 0 10px 0;
+  }
+  
+  .ta-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .ta-info ul li {
+    padding: 5px 0;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .team-members {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .team-member-card {
+      width: 100%;
+      max-width: 320px;
+    }
+    
+    .feature-list li {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .feature-icon {
+      margin: 0 0 15px 0;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .about-us-container {
+      padding: 20px 15px;
+    }
+  }

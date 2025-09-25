@@ -1,0 +1,898 @@
+/* PredictionPage.css */
+
+/* Global Styles */
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #6c6ceb;
+    --accent-color: #50c878;
+    --text-color: #333333;
+    --light-text: #666666;
+    --bg-color: #f5f8fa;
+    --card-bg: #ffffff;
+    --border-color: #e1e4e8;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    --aqi-good: #55a84f;
+    --aqi-moderate: #fff964;
+    --aqi-sensitive: #ff9a52;
+    --aqi-unhealthy: #fe6a69;
+    --aqi-very-unhealthy: #a97abc;
+    --aqi-hazardous: #a87383;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    --primary-color: #5c9ce6;
+    --secondary-color: #8484ff;
+    --accent-color: #60d889;
+    --text-color: #f0f0f0;
+    --light-text: #bbbbbb;
+    --bg-color: #1a1a1a;
+    --card-bg: #2a2a2a;
+    --border-color: #444444;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode specific adjustments */
+.dark-mode .prediction-page {
+    background-color: var(--bg-color);
+}
+
+.dark-mode .aqi-highlight {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .aqi-description p,
+.dark-mode .station-info p {
+    color: var(--text-color);
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3 {
+    color: var(--primary-color);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.dark-mode-toggle button {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle button:hover {
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+    padding: 1rem 2rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--light-text);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.tab.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.tab.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px 3px 0 0;
+}
+
+.tab:hover {
+    color: var(--primary-color);
+}
+
+/* Form Styles */
+.prediction-form {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: border-color 0.3s;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.predict-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.predict-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.predict-button:disabled {
+    background-color: var(--light-text);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading Spinner */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Prediction Results */
+.prediction-results {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.prediction-results h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.aqi-highlight {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.aqi-values {
+    flex: 0 0 180px;
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add overlay for better text contrast */
+.aqi-values::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 0;
+}
+
+.aqi-values > * {
+    position: relative;
+    z-index: 1;
+}
+
+.aqi-values h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.aqi-number {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.aqi-category {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.aqi-description {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.aqi-description p {
+    margin-top: 0;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.station-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.station-info p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-color);
+}
+
+/* Charts */
+.prediction-chart-container {
+    margin-bottom: 2rem;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+/* Pollutants Grid */
+.pollutants-section {
+    margin-top: 2rem;
+}
+
+.pollutant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.pollutant-card {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pollutant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.pollutant-card h4 {
+    margin-top: 0;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.pollutant-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.value-label {
+    font-weight: 500;
+}
+
+.value-number {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Model Performance Section */
+.performance-section {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.state-selector {
+    max-width: 400px;
+    margin: 0 auto 2rem;
+}
+
+.state-selector label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.state-selector select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.metrics-container {
+    margin-top: 2rem;
+}
+
+.metrics-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.metric-card {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    flex: 1;
+    min-width: 170px;
+    max-width: 250px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 1rem 0;
+}
+
+.metric-description {
+    font-size: 0.9rem;
+    color: var(--light-text);
+}
+
+.performance-visuals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.dark-mode .performance-visuals h4 {
+    color: var(--primary-color)
+}
+
+
+@media (min-width: 1024px) {
+    .performance-visuals {
+        grid-template-columns: 3fr 2fr;
+    }
+}
+
+.model-image {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.model-image h4,
+.pollutant-metrics h4 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.model-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.pollutant-metrics {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.dark-mode .pollutant-metrics h4 {
+    color: var(--primary-color)
+}
+
+.metrics-table-container {
+    overflow-x: auto;
+}
+
+.metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dark-mode .metrics-table {
+    color: white
+}
+
+.metrics-table th,
+.metrics-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+
+.metrics-table th {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.metrics-table tr:last-child td {
+    border-bottom: none;
+}
+
+.individual-pollutants h4 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+}
+
+.dark-mode .individual-pollutants h4 {
+
+    color: var(--primary-color)
+}
+
+
+
+.pollutant-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+
+}
+
+.dark-mode .pollutant-images-grid {
+
+    color: white
+}
+
+.pollutant-image {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.0rem;
+    box-shadow: var(--shadow);
+}
+
+.pollutant-image h5 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pollutant-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.overall-metrics {
+    margin-top: 3rem;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.dark-mode .overall-metrics {
+    color: var(--primary-color)
+}
+
+.overall-metrics h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.overall-metrics-charts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .overall-metrics-charts {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.chart-container {
+    
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.dark-mode .chart-container {
+    background: linear-gradient(145deg, #1e293b, #234471);
+  
+   
+}
+
+.chart-container h4 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* Model Architecture Section */
+.model-architecture-section {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.model-architecture-section h2,
+.model-architecture-section h3 {
+    color: var(--primary-color);
+}
+
+.model-architecture-section p {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Model Layers Diagram */
+.model-layers {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layer-box {
+    width: 100%;
+    max-width: 700px;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+.layer-box h4 {
+    margin: 0 0 10px 0;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.layer-box p {
+    margin: 0;
+    color: #2c2c2c;
+    font-size: 1.05rem;
+}
+
+/* Add text shadow for better contrast on colored backgrounds */
+.layer-box h4,
+.layer-box p {
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode .layer-box h4,
+.dark-mode .layer-box p {
+    color: #1a1a1a;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+.connector {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 20px solid #666;
+    margin: 15px auto;
+}
+
+.dark-mode .connector {
+    border-top-color: #999;
+}
+
+/* Model Details Cards */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.details-card {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.details-card-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.details-card-text {
+    margin: 0;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+.details-card-note {
+    font-size: 12px;
+    color: var(--light-text);
+    margin-top: 5px;
+}
+
+/* Training Parameters Grid */
+.training-params-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.param-card {
+    background-color: #e6f7ff;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.dark-mode .param-card {
+    background-color: rgba(74, 144, 226, 0.2);
+}
+
+.param-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.param-value {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.feature-card {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.icon-container {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.feature-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.feature-text {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* Limitations List */
+.limitations-list {
+    background-color: var(--bg-color);
+    border-radius: 4px;
+    padding: 15px;
+    list-style-type: none;
+    margin: 0;
+}
+
+.limitation-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.limitation-item:last-child {
+    border-bottom: none;
+}
+
+.limitation-title {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.dark-mode .limitation-title {
+    color: #ff6b6b;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .metrics-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .metric-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .aqi-highlight {
+        flex-direction: column;
+    }
+
+    .aqi-value {
+        width: 100%;
+        margin: 0 auto;
+    }
+}

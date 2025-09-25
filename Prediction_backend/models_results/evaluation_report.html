@@ -1,0 +1,615 @@
+
+    <html>
+    <head>
+        <title>Air Pollutant Prediction Results</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1, h2, h3 { color: #2c3e50; }
+            table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .metric-summary { margin-bottom: 30px; }
+            img { max-width: 100%; height: auto; margin: 10px 0; }
+        </style>
+    </head>
+    <body>
+        <h1>Air Pollutant Prediction - Model Evaluation Report</h1>
+        <p>Generated on 2025-05-03 15:19:31</p>
+        
+        <div class="metric-summary">
+            <h2>Average Metrics by Pollutant</h2>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse</th>
+      <th>rmse</th>
+      <th>mae</th>
+      <th>r2</th>
+    </tr>
+    <tr>
+      <th>pollutant</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>co</th>
+      <td>117155.890425</td>
+      <td>255.503175</td>
+      <td>180.243860</td>
+      <td>0.467792</td>
+    </tr>
+    <tr>
+      <th>nh3</th>
+      <td>29.676607</td>
+      <td>4.511520</td>
+      <td>3.185272</td>
+      <td>0.405729</td>
+    </tr>
+    <tr>
+      <th>no</th>
+      <td>27.677569</td>
+      <td>3.508254</td>
+      <td>2.147379</td>
+      <td>-0.141935</td>
+    </tr>
+    <tr>
+      <th>no2</th>
+      <td>1262.980828</td>
+      <td>35.416724</td>
+      <td>10.912194</td>
+      <td>0.035334</td>
+    </tr>
+    <tr>
+      <th>o3</th>
+      <td>469.915069</td>
+      <td>20.883281</td>
+      <td>16.423551</td>
+      <td>0.392958</td>
+    </tr>
+    <tr>
+      <th>pm10</th>
+      <td>1740.360632</td>
+      <td>35.434099</td>
+      <td>26.563763</td>
+      <td>0.481729</td>
+    </tr>
+    <tr>
+      <th>pm2_5</th>
+      <td>1185.443840</td>
+      <td>28.822056</td>
+      <td>20.186412</td>
+      <td>0.640709</td>
+    </tr>
+    <tr>
+      <th>so2</th>
+      <td>152.386839</td>
+      <td>8.849425</td>
+      <td>6.708200</td>
+      <td>0.224024</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <div class="metric-summary">
+            <h2>Average Metrics by State</h2>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mse</th>
+      <th>rmse</th>
+      <th>mae</th>
+      <th>r2</th>
+    </tr>
+    <tr>
+      <th>state</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Andhra Pradesh</th>
+      <td>3179.014441</td>
+      <td>34.090668</td>
+      <td>21.231150</td>
+      <td>0.277979</td>
+    </tr>
+    <tr>
+      <th>Arunachal Pradesh</th>
+      <td>357.279022</td>
+      <td>12.398572</td>
+      <td>7.457607</td>
+      <td>0.218413</td>
+    </tr>
+    <tr>
+      <th>Assam</th>
+      <td>2753.867924</td>
+      <td>30.145871</td>
+      <td>19.818570</td>
+      <td>0.425452</td>
+    </tr>
+    <tr>
+      <th>Bihar</th>
+      <td>6752.503475</td>
+      <td>46.986856</td>
+      <td>31.459834</td>
+      <td>0.407333</td>
+    </tr>
+    <tr>
+      <th>Chandigarh</th>
+      <td>3988.979936</td>
+      <td>35.936796</td>
+      <td>24.416236</td>
+      <td>0.443126</td>
+    </tr>
+    <tr>
+      <th>Chhattisgarh</th>
+      <td>9409.065495</td>
+      <td>53.528517</td>
+      <td>38.896265</td>
+      <td>0.325758</td>
+    </tr>
+    <tr>
+      <th>Delhi</th>
+      <td>59587.954392</td>
+      <td>112.244530</td>
+      <td>84.686063</td>
+      <td>0.637930</td>
+    </tr>
+    <tr>
+      <th>Gujarat</th>
+      <td>10424.436591</td>
+      <td>53.123809</td>
+      <td>38.190246</td>
+      <td>0.358114</td>
+    </tr>
+    <tr>
+      <th>Haryana</th>
+      <td>54267.167507</td>
+      <td>109.042761</td>
+      <td>72.405577</td>
+      <td>0.313654</td>
+    </tr>
+    <tr>
+      <th>Himachal Pradesh</th>
+      <td>1734.055303</td>
+      <td>28.409257</td>
+      <td>18.815672</td>
+      <td>0.322705</td>
+    </tr>
+    <tr>
+      <th>Jammu and Kashmir</th>
+      <td>11095.460652</td>
+      <td>54.441979</td>
+      <td>38.964511</td>
+      <td>0.426732</td>
+    </tr>
+    <tr>
+      <th>Jharkhand</th>
+      <td>12298.886437</td>
+      <td>58.664323</td>
+      <td>41.874764</td>
+      <td>0.307854</td>
+    </tr>
+    <tr>
+      <th>Karanataka</th>
+      <td>9511.418662</td>
+      <td>46.513790</td>
+      <td>27.609376</td>
+      <td>0.348280</td>
+    </tr>
+    <tr>
+      <th>Karnataka</th>
+      <td>4642.873733</td>
+      <td>34.863555</td>
+      <td>19.048863</td>
+      <td>0.414172</td>
+    </tr>
+    <tr>
+      <th>Kerala</th>
+      <td>3061.060787</td>
+      <td>30.120006</td>
+      <td>20.555921</td>
+      <td>0.356875</td>
+    </tr>
+    <tr>
+      <th>Madhya Pradesh</th>
+      <td>2341.512891</td>
+      <td>29.241847</td>
+      <td>18.381372</td>
+      <td>0.411218</td>
+    </tr>
+    <tr>
+      <th>Maharashtra</th>
+      <td>31167.782589</td>
+      <td>87.037821</td>
+      <td>56.444451</td>
+      <td>0.384951</td>
+    </tr>
+    <tr>
+      <th>Manipur</th>
+      <td>899.037705</td>
+      <td>18.398984</td>
+      <td>11.569613</td>
+      <td>0.642535</td>
+    </tr>
+    <tr>
+      <th>Meghalaya</th>
+      <td>1300.723460</td>
+      <td>24.950413</td>
+      <td>17.781387</td>
+      <td>0.053587</td>
+    </tr>
+    <tr>
+      <th>Mizoram</th>
+      <td>2028.677327</td>
+      <td>30.971464</td>
+      <td>24.926916</td>
+      <td>-0.768569</td>
+    </tr>
+    <tr>
+      <th>Nagaland</th>
+      <td>622.191223</td>
+      <td>17.387942</td>
+      <td>12.097123</td>
+      <td>0.263203</td>
+    </tr>
+    <tr>
+      <th>Odisha</th>
+      <td>4455.478058</td>
+      <td>38.710900</td>
+      <td>25.175287</td>
+      <td>0.437470</td>
+    </tr>
+    <tr>
+      <th>Puducherry</th>
+      <td>1161.177492</td>
+      <td>23.882186</td>
+      <td>15.604492</td>
+      <td>0.254387</td>
+    </tr>
+    <tr>
+      <th>Punjab</th>
+      <td>15485.391630</td>
+      <td>64.376499</td>
+      <td>42.562922</td>
+      <td>0.173111</td>
+    </tr>
+    <tr>
+      <th>Rajasthan</th>
+      <td>5577.095388</td>
+      <td>41.153401</td>
+      <td>29.489962</td>
+      <td>-0.191118</td>
+    </tr>
+    <tr>
+      <th>Sikkim</th>
+      <td>493.680317</td>
+      <td>14.192316</td>
+      <td>8.417905</td>
+      <td>0.425461</td>
+    </tr>
+    <tr>
+      <th>Tamil Nadu</th>
+      <td>6404.089859</td>
+      <td>42.216751</td>
+      <td>26.840575</td>
+      <td>0.215770</td>
+    </tr>
+    <tr>
+      <th>Telangana</th>
+      <td>12960.849287</td>
+      <td>53.286841</td>
+      <td>34.186754</td>
+      <td>0.518763</td>
+    </tr>
+    <tr>
+      <th>Tripura</th>
+      <td>1549.434292</td>
+      <td>26.643509</td>
+      <td>18.099375</td>
+      <td>0.610448</td>
+    </tr>
+    <tr>
+      <th>Uttar Pradesh</th>
+      <td>47748.663253</td>
+      <td>103.439781</td>
+      <td>66.082691</td>
+      <td>0.290348</td>
+    </tr>
+    <tr>
+      <th>Uttarakhand</th>
+      <td>2615.464864</td>
+      <td>34.128228</td>
+      <td>23.761286</td>
+      <td>0.330447</td>
+    </tr>
+    <tr>
+      <th>West Bengal</th>
+      <td>158222.053244</td>
+      <td>181.183956</td>
+      <td>128.629756</td>
+      <td>0.388972</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <h2>Performance Heatmaps</h2>
+        <p>R² Score by State and Pollutant:</p>
+        <img src="plots/r2_heatmap.png" alt="R² Heatmap">
+        
+        <p>RMSE by State and Pollutant:</p>
+        <img src="plots/rmse_heatmap.png" alt="RMSE Heatmap">
+        
+        <h2>State-wise Results</h2>
+    
+        <h3>Delhi</h3>
+        <p><a href="Delhi/Delhi_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Delhi/Delhi_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Delhi/Delhi_all_predictions.png" alt="Delhi Predictions">
+        <p>Training History:</p>
+        <img src="Delhi/Delhi_training_history.png" alt="Delhi Training History">
+        
+        <h3>Karnataka</h3>
+        <p><a href="Karnataka/Karnataka_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Karnataka/Karnataka_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Karnataka/Karnataka_all_predictions.png" alt="Karnataka Predictions">
+        <p>Training History:</p>
+        <img src="Karnataka/Karnataka_training_history.png" alt="Karnataka Training History">
+        
+        <h3>Telangana</h3>
+        <p><a href="Telangana/Telangana_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Telangana/Telangana_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Telangana/Telangana_all_predictions.png" alt="Telangana Predictions">
+        <p>Training History:</p>
+        <img src="Telangana/Telangana_training_history.png" alt="Telangana Training History">
+        
+        <h3>Gujarat</h3>
+        <p><a href="Gujarat/Gujarat_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Gujarat/Gujarat_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Gujarat/Gujarat_all_predictions.png" alt="Gujarat Predictions">
+        <p>Training History:</p>
+        <img src="Gujarat/Gujarat_training_history.png" alt="Gujarat Training History">
+        
+        <h3>Rajasthan</h3>
+        <p><a href="Rajasthan/Rajasthan_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Rajasthan/Rajasthan_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Rajasthan/Rajasthan_all_predictions.png" alt="Rajasthan Predictions">
+        <p>Training History:</p>
+        <img src="Rajasthan/Rajasthan_training_history.png" alt="Rajasthan Training History">
+        
+        <h3>Haryana</h3>
+        <p><a href="Haryana/Haryana_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Haryana/Haryana_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Haryana/Haryana_all_predictions.png" alt="Haryana Predictions">
+        <p>Training History:</p>
+        <img src="Haryana/Haryana_training_history.png" alt="Haryana Training History">
+        
+        <h3>Tamil Nadu</h3>
+        <p><a href="Tamil Nadu/Tamil Nadu_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Tamil Nadu/Tamil Nadu_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Tamil Nadu/Tamil Nadu_all_predictions.png" alt="Tamil Nadu Predictions">
+        <p>Training History:</p>
+        <img src="Tamil Nadu/Tamil Nadu_training_history.png" alt="Tamil Nadu Training History">
+        
+        <h3>Karanataka</h3>
+        <p><a href="Karanataka/Karanataka_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Karanataka/Karanataka_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Karanataka/Karanataka_all_predictions.png" alt="Karanataka Predictions">
+        <p>Training History:</p>
+        <img src="Karanataka/Karanataka_training_history.png" alt="Karanataka Training History">
+        
+        <h3>Kerala</h3>
+        <p><a href="Kerala/Kerala_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Kerala/Kerala_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Kerala/Kerala_all_predictions.png" alt="Kerala Predictions">
+        <p>Training History:</p>
+        <img src="Kerala/Kerala_training_history.png" alt="Kerala Training History">
+        
+        <h3>Uttar Pradesh</h3>
+        <p><a href="Uttar Pradesh/Uttar Pradesh_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Uttar Pradesh/Uttar Pradesh_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Uttar Pradesh/Uttar Pradesh_all_predictions.png" alt="Uttar Pradesh Predictions">
+        <p>Training History:</p>
+        <img src="Uttar Pradesh/Uttar Pradesh_training_history.png" alt="Uttar Pradesh Training History">
+        
+        <h3>Maharashtra</h3>
+        <p><a href="Maharashtra/Maharashtra_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Maharashtra/Maharashtra_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Maharashtra/Maharashtra_all_predictions.png" alt="Maharashtra Predictions">
+        <p>Training History:</p>
+        <img src="Maharashtra/Maharashtra_training_history.png" alt="Maharashtra Training History">
+        
+        <h3>Madhya Pradesh</h3>
+        <p><a href="Madhya Pradesh/Madhya Pradesh_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Madhya Pradesh/Madhya Pradesh_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Madhya Pradesh/Madhya Pradesh_all_predictions.png" alt="Madhya Pradesh Predictions">
+        <p>Training History:</p>
+        <img src="Madhya Pradesh/Madhya Pradesh_training_history.png" alt="Madhya Pradesh Training History">
+        
+        <h3>Bihar</h3>
+        <p><a href="Bihar/Bihar_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Bihar/Bihar_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Bihar/Bihar_all_predictions.png" alt="Bihar Predictions">
+        <p>Training History:</p>
+        <img src="Bihar/Bihar_training_history.png" alt="Bihar Training History">
+        
+        <h3>West Bengal</h3>
+        <p><a href="West Bengal/West Bengal_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="West Bengal/West Bengal_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="West Bengal/West Bengal_all_predictions.png" alt="West Bengal Predictions">
+        <p>Training History:</p>
+        <img src="West Bengal/West Bengal_training_history.png" alt="West Bengal Training History">
+        
+        <h3>Punjab</h3>
+        <p><a href="Punjab/Punjab_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Punjab/Punjab_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Punjab/Punjab_all_predictions.png" alt="Punjab Predictions">
+        <p>Training History:</p>
+        <img src="Punjab/Punjab_training_history.png" alt="Punjab Training History">
+        
+        <h3>Chhattisgarh</h3>
+        <p><a href="Chhattisgarh/Chhattisgarh_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Chhattisgarh/Chhattisgarh_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Chhattisgarh/Chhattisgarh_all_predictions.png" alt="Chhattisgarh Predictions">
+        <p>Training History:</p>
+        <img src="Chhattisgarh/Chhattisgarh_training_history.png" alt="Chhattisgarh Training History">
+        
+        <h3>Meghalaya</h3>
+        <p><a href="Meghalaya/Meghalaya_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Meghalaya/Meghalaya_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Meghalaya/Meghalaya_all_predictions.png" alt="Meghalaya Predictions">
+        <p>Training History:</p>
+        <img src="Meghalaya/Meghalaya_training_history.png" alt="Meghalaya Training History">
+        
+        <h3>Odisha</h3>
+        <p><a href="Odisha/Odisha_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Odisha/Odisha_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Odisha/Odisha_all_predictions.png" alt="Odisha Predictions">
+        <p>Training History:</p>
+        <img src="Odisha/Odisha_training_history.png" alt="Odisha Training History">
+        
+        <h3>Tripura</h3>
+        <p><a href="Tripura/Tripura_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Tripura/Tripura_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Tripura/Tripura_all_predictions.png" alt="Tripura Predictions">
+        <p>Training History:</p>
+        <img src="Tripura/Tripura_training_history.png" alt="Tripura Training History">
+        
+        <h3>Assam</h3>
+        <p><a href="Assam/Assam_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Assam/Assam_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Assam/Assam_all_predictions.png" alt="Assam Predictions">
+        <p>Training History:</p>
+        <img src="Assam/Assam_training_history.png" alt="Assam Training History">
+        
+        <h3>Andhra Pradesh</h3>
+        <p><a href="Andhra Pradesh/Andhra Pradesh_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Andhra Pradesh/Andhra Pradesh_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Andhra Pradesh/Andhra Pradesh_all_predictions.png" alt="Andhra Pradesh Predictions">
+        <p>Training History:</p>
+        <img src="Andhra Pradesh/Andhra Pradesh_training_history.png" alt="Andhra Pradesh Training History">
+        
+        <h3>Jharkhand</h3>
+        <p><a href="Jharkhand/Jharkhand_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Jharkhand/Jharkhand_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Jharkhand/Jharkhand_all_predictions.png" alt="Jharkhand Predictions">
+        <p>Training History:</p>
+        <img src="Jharkhand/Jharkhand_training_history.png" alt="Jharkhand Training History">
+        
+        <h3>Manipur</h3>
+        <p><a href="Manipur/Manipur_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Manipur/Manipur_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Manipur/Manipur_all_predictions.png" alt="Manipur Predictions">
+        <p>Training History:</p>
+        <img src="Manipur/Manipur_training_history.png" alt="Manipur Training History">
+        
+        <h3>Puducherry</h3>
+        <p><a href="Puducherry/Puducherry_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Puducherry/Puducherry_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Puducherry/Puducherry_all_predictions.png" alt="Puducherry Predictions">
+        <p>Training History:</p>
+        <img src="Puducherry/Puducherry_training_history.png" alt="Puducherry Training History">
+        
+        <h3>Chandigarh</h3>
+        <p><a href="Chandigarh/Chandigarh_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Chandigarh/Chandigarh_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Chandigarh/Chandigarh_all_predictions.png" alt="Chandigarh Predictions">
+        <p>Training History:</p>
+        <img src="Chandigarh/Chandigarh_training_history.png" alt="Chandigarh Training History">
+        
+        <h3>Nagaland</h3>
+        <p><a href="Nagaland/Nagaland_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Nagaland/Nagaland_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Nagaland/Nagaland_all_predictions.png" alt="Nagaland Predictions">
+        <p>Training History:</p>
+        <img src="Nagaland/Nagaland_training_history.png" alt="Nagaland Training History">
+        
+        <h3>Sikkim</h3>
+        <p><a href="Sikkim/Sikkim_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Sikkim/Sikkim_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Sikkim/Sikkim_all_predictions.png" alt="Sikkim Predictions">
+        <p>Training History:</p>
+        <img src="Sikkim/Sikkim_training_history.png" alt="Sikkim Training History">
+        
+        <h3>Mizoram</h3>
+        <p><a href="Mizoram/Mizoram_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Mizoram/Mizoram_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Mizoram/Mizoram_all_predictions.png" alt="Mizoram Predictions">
+        <p>Training History:</p>
+        <img src="Mizoram/Mizoram_training_history.png" alt="Mizoram Training History">
+        
+        <h3>Uttarakhand</h3>
+        <p><a href="Uttarakhand/Uttarakhand_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Uttarakhand/Uttarakhand_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Uttarakhand/Uttarakhand_all_predictions.png" alt="Uttarakhand Predictions">
+        <p>Training History:</p>
+        <img src="Uttarakhand/Uttarakhand_training_history.png" alt="Uttarakhand Training History">
+        
+        <h3>Himachal Pradesh</h3>
+        <p><a href="Himachal Pradesh/Himachal Pradesh_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Himachal Pradesh/Himachal Pradesh_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Himachal Pradesh/Himachal Pradesh_all_predictions.png" alt="Himachal Pradesh Predictions">
+        <p>Training History:</p>
+        <img src="Himachal Pradesh/Himachal Pradesh_training_history.png" alt="Himachal Pradesh Training History">
+        
+        <h3>Jammu and Kashmir</h3>
+        <p><a href="Jammu and Kashmir/Jammu and Kashmir_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Jammu and Kashmir/Jammu and Kashmir_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Jammu and Kashmir/Jammu and Kashmir_all_predictions.png" alt="Jammu and Kashmir Predictions">
+        <p>Training History:</p>
+        <img src="Jammu and Kashmir/Jammu and Kashmir_training_history.png" alt="Jammu and Kashmir Training History">
+        
+        <h3>Arunachal Pradesh</h3>
+        <p><a href="Arunachal Pradesh/Arunachal Pradesh_metrics.csv">Download Metrics CSV</a></p>
+        <p><a href="Arunachal Pradesh/Arunachal Pradesh_predictions.csv">Download Predictions CSV</a></p>
+        <p>All Pollutants Prediction:</p>
+        <img src="Arunachal Pradesh/Arunachal Pradesh_all_predictions.png" alt="Arunachal Pradesh Predictions">
+        <p>Training History:</p>
+        <img src="Arunachal Pradesh/Arunachal Pradesh_training_history.png" alt="Arunachal Pradesh Training History">
+        
+    </body>
+    </html>
+    

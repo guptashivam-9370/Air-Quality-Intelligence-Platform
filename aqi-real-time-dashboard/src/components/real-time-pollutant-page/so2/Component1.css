@@ -1,0 +1,177 @@
+/* Main container */
+.pm25-containers {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  color: rgb(29, 24, 24);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Title styling */
+.pm25-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.location-title {
+  font-size: 1.25rem;
+  color: #60a5fa;
+  margin-bottom: 1.5rem;
+}
+
+/* Content container */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .content-container {
+    flex-direction: row;
+  }
+}
+
+/* Image container */
+.image-container-1 {
+  width: 50%;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .image-container {
+    width: 50%;
+  }
+}
+
+.pollution-image {
+  width: 100%;
+}
+
+/* Info container */
+.info-container {
+  width: 100%;
+  padding: 1rem;
+  background-color: #fff;
+  color: black ;
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .info-container {
+    width: 50%;
+  }
+}
+
+/* Status message */
+.status-message {
+  margin-bottom: 2rem;
+}
+
+.status-message p {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.pm25-value {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+/* WHO comparison */
+.who-comparison {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.who-badge {
+  background-color: #dc2626;
+  color: white;
+  padding: 1rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+}
+
+.times-above {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.who-info {
+  background-color: #fff;
+  padding: 1rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  flex: 1;
+}
+
+.who-value {
+  color: #60a5fa;
+}
+
+/* Risk container */
+.risk-container {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.risk-badge {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  flex: 1;
+  text-align: center;
+}
+
+.risk-badge p {
+  font-weight: 700;
+}
+
+/* Recommendations */
+.recommendations {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.recommendations h3 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.recommendations ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.recommendations li {
+  margin-bottom: 0.25rem;
+}
+
+.dark-mode .pm25-containers  {
+  background-color: #1f2937;
+  color: #fff
+}
+
+.dark-mode  .info-container  {
+  background-color: #1f2937;
+  color: #fff
+}
+
+
+.dark-mode  .recommendations  {
+  background-color: #161a1f;
+  color: #fff
+}
+.dark-mode  .who-info  {
+  background-color: #161a1f;
+  color: #fff
+}

@@ -1,0 +1,23 @@
+{
+    "pollutants": [
+        "pm2_5",
+        "pm10",
+        "so2",
+        "no",
+        "no2",
+        "nh3",
+        "o3",
+        "co"
+    ],
+    "sequence_length": 10,
+    "model_params": {
+        "lstm_units": 128,
+        "dropout_rate": 0.3,
+        "l2_reg": 0.001,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "epochs": 200,
+        "patience": 20
+    },
+    "training_date": "2025-05-03 13:40:52.148657"
+}

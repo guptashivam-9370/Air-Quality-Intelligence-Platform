@@ -1,0 +1,453 @@
+/* WorldAQIMap.css */
+.world-aqi-map-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.map-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--text-color);
+}
+
+.map-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.last-updated {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: var(--secondary-text-color);
+}
+
+.refresh-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background-color: var(--accent-color, #4a90e2);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.refresh-button:hover {
+  background-color: var(--accent-color-hover, #3a80d2);
+}
+
+.refresh-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.map-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+}
+
+/* Map pins and markers */
+.map-pin-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.map-pin-icon {
+  background: transparent;
+  border: none;
+}
+
+.hover-tooltip {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hover-tooltip:after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.8);
+}
+
+.tooltip-aqi {
+  font-size: 10px;
+  opacity: 0.9;
+}
+
+/* Loading indicator */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dark-theme .loading-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--accent-color, #4a90e2);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Popup styling */
+.city-popup {
+  width: 300px;
+}
+
+.popup-header {
+  padding: 10px;
+  border-radius: 4px 4px 0 0;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.aqi-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.aqi-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.aqi-label {
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.pollutant-details {
+  padding: 10px;
+}
+
+.pollutant-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.pollutant-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.pollutant-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 4px;
+  background-color: var(--background-light);
+  border-radius: 4px;
+}
+
+.pollutant-name {
+  font-weight: 600;
+}
+
+.cache-notice {
+  margin: 10px 0 0 0;
+  padding: 5px;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #856404;
+  text-align: center;
+}
+
+/* AQI Legend styled to match the image */
+.aqi-legend-container {
+  width: 100%;
+  margin: 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+  padding: 15px;
+  color: black;
+}
+
+.aqi-legend-labels {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.aqi-legend-label {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+}
+
+.aqi-legend-bar {
+  display: flex;
+  height: 12px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.aqi-legend-segment {
+  flex: 1;
+  height: 100%;
+}
+
+.aqi-legend-values {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+/* AQI Categories Info */
+.aqi-info {
+  margin-top: 30px;
+}
+
+.aqi-info h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: var(--text-color);
+}
+
+.aqi-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.aqi-category-card {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+}
+
+.aqi-category-header {
+  padding: 12px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aqi-category-header h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.aqi-range {
+  font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.aqi-health-implications {
+  padding: 12px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+.pin-size-legend {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.pin-size-legend h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #333;
+}
+
+.pin-size-examples {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.pin-example {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.example-pin {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-pin::before {
+  content: '';
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'%3E%3C/path%3E%3Ccircle cx='12' cy='10' r='3'%3E%3C/circle%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.small {
+  width: 20px;
+  height: 20px;
+  background-color: #00e400;
+}
+
+.medium {
+  width: 28px;
+  height: 28px;
+  background-color: #ffff00;
+}
+
+.large {
+  width: 36px;
+  height: 36px;
+  background-color: #ff0000;
+}
+
+.pin-example span {
+  font-size: 14px;
+}
+
+.dark-mode .pin-size-legend {
+  
+  background-color:#21314d; 
+  color:white;
+}
+
+.dark-mode .pin-size-legend h4 {
+  color:white
+}
+
+.dark-mode .aqi-legend-container{
+  background-color: #21314d;
+  color:white
+}
+:root {
+  --text-color: #333333;
+  --secondary-text-color: #666666;
+  --background-color: #ffffff;
+  --background-light: #f5f5f5;
+  --accent-color: #4a90e2;
+  --accent-color-hover: #3a80d2;
+  --border-color: #e0e0e0;
+}
+
+.dark-theme {
+  --text-color: #e0e0e0;
+  --secondary-text-color: #aaaaaa;
+  --background-color: #222222;
+  --background-light: #333333;
+  --accent-color: #5a9cf2;
+  --accent-color-hover: #4a8ce2;
+  --border-color: #444444;
+}
+
+.dark-map {
+  filter: brightness(0.85) contrast(1.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .map-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .map-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .aqi-categories-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .aqi-legend-labels,
+  .aqi-legend-values {
+    font-size: 11px;
+  }
+}

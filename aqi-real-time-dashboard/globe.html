@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive 3D Earth Globe with Real-time AQI Heatmap</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+    }
+    canvas {
+      display: block;
+    }
+    .info {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 300px;
+    }
+    .legend {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 5px;
+      color: white;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .controls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 5px;
+      color: white;
+    }
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button.active {
+      background-color: #2E7D32;
+    }
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 24px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loadingIndicator">Loading AQI data from OpenWeatherMap...</div>
+  <div class="info">
+    <p>Drag to rotate | Scroll to zoom</p>
+  </div>
+  <div class="legend">
+    <h3>AQI Legend</h3>
+    <div class="legend-item">
+      <span class="legend-color" style="background-color: #00E400;"></span>
+      <span>0-50: Good</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color" style="background-color: #FFFF00;"></span>
+      <span>51-100: Moderate</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color" style="background-color: #FF7E00;"></span>
+      <span>101-150: Unhealthy for Sensitive Groups</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color" style="background-color: #FF0000;"></span>
+      <span>151-200: Unhealthy</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color" style="background-color: #8F3F97;"></span>
+      <span>201-300: Very Unhealthy</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color" style="background-color: #7E0023;"></span>
+      <span>301+: Hazardous</span>
+    </div>
+  </div>
+  <div class="controls">
+    <h3>Display Options</h3>
+    <button id="toggleAQI" class="active">Show AQI Heatmap</button>
+    <button id="toggleAutoRotate" class="active">Auto Rotate</button>
+  </div>
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // OpenWeatherMap API Key
+    const apiKey = 'aac405e628f9c30a047d3de13192a7f7';
+    
+    // Global variables for AQI canvas context to sample pixel data
+    let aqiCanvas, aqiCtx;
+    
+    // Major cities data for AQI fetching and location naming
+    const cities = [
+      { name: "New York", country: "US", lat: 40.7128, lon: -74.0060 },
+      { name: "Los Angeles", country: "US", lat: 34.0522, lon: -118.2437 },
+      { name: "London", country: "GB", lat: 51.5074, lon: -0.1278 },
+      { name: "Paris", country: "FR", lat: 48.8566, lon: 2.3522 },
+      { name: "Beijing", country: "CN", lat: 39.9042, lon: 116.4074 },
+      { name: "Tokyo", country: "JP", lat: 35.6762, lon: 139.6503 },
+      { name: "Delhi", country: "IN", lat: 28.6139, lon: 77.2090 },
+      { name: "Mumbai", country: "IN", lat: 19.0760, lon: 72.8777 },
+      { name: "São Paulo", country: "BR", lat: -23.5505, lon: -46.6333 },
+      { name: "Mexico City", country: "MX", lat: 19.4326, lon: -99.1332 },
+      { name: "Cairo", country: "EG", lat: 30.0444, lon: 31.2357 },
+      { name: "Lagos", country: "NG", lat: 6.5244, lon: 3.3792 },
+      { name: "Johannesburg", country: "ZA", lat: -26.2041, lon: 28.0473 },
+      { name: "Moscow", country: "RU", lat: 55.7558, lon: 37.6173 },
+      { name: "Sydney", country: "AU", lat: -33.8688, lon: 151.2093 },
+      { name: "Bangkok", country: "TH", lat: 13.7563, lon: 100.5018 },
+      { name: "Singapore", country: "SG", lat: 1.3521, lon: 103.8198 },
+      { name: "Dubai", country: "AE", lat: 25.2048, lon: 55.2708 },
+      { name: "Istanbul", country: "TR", lat: 41.0082, lon: 28.9784 },
+      { name: "Jakarta", country: "ID", lat: -6.2088, lon: 106.8456 },
+      { name: "Seoul", country: "KR", lat: 37.5665, lon: 126.9780 },
+      { name: "Buenos Aires", country: "AR", lat: -34.6037, lon: -58.3816 },
+      { name: "Lima", country: "PE", lat: -12.0464, lon: -77.0428 },
+      { name: "Toronto", country: "CA", lat: 43.6532, lon: -79.3832 },
+      { name: "Chicago", country: "US", lat: 41.8781, lon: -87.6298 },
+      { name: "San Francisco", country: "US", lat: 37.7749, lon: -122.4194 },
+      { name: "Madrid", country: "ES", lat: 40.4168, lon: -3.7038 },
+      { name: "Berlin", country: "DE", lat: 52.5200, lon: 13.4050 },
+      { name: "Amsterdam", country: "NL", lat: 52.3676, lon: 4.9041 },
+      { name: "Rome", country: "IT", lat: 41.9028, lon: 12.4964 }
+    ];
+    
+    // Store AQI data by location
+    const aqiData = {};
+    // Store location data for reverse lookup
+    const locationData = {};
+
+    // Set up scene, camera, and renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Add ambient and directional light
+    const ambientLight = new THREE.AmbientLight(0x333333);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 3, 5);
+    scene.add(directionalLight);
+
+    // Create Earth geometry and material
+    const earthGeometry = new THREE.SphereGeometry(2, 64, 64);
+    const textureLoader = new THREE.TextureLoader();
+    const earthMaterial = new THREE.MeshPhongMaterial({
+      map: textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/land_ocean_ice_cloud_2048.jpg'),
+      bumpMap: textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/earth_bump.jpg'),
+      bumpScale: 0.05,
+      specularMap: textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/earth_specular_2048.jpg'),
+      specular: new THREE.Color('grey')
+    });
+    const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+    scene.add(earth);
+
+    // Function to convert lat/lon to 3D coordinates on the sphere
+    function latLonToVector3(lat, lon, radius) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      const x = -(radius * Math.sin(phi) * Math.cos(theta));
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      return new THREE.Vector3(x, y, z);
+    }
+
+    // Function to convert lat/lon to UV coordinates for texture mapping
+    function latLonToUV(lat, lon) {
+      const u = (lon + 180) / 360;
+      const v = (90 - lat) / 180;
+      return { u, v };
+    }
+
+    // Fetch AQI data from OpenWeatherMap
+    async function fetchAQIData() {
+      const requests = cities.map(city => {
+        const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}`;
+        return fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            const aqi = data.list && data.list[0] ? data.list[0].main.aqi : 1;
+            // Store the AQI value for this location
+            aqiData[`${city.lat},${city.lon}`] = {
+              aqi: aqi,
+              name: `${city.name}, ${city.country}`
+            };
+            
+            // Store location data for reverse lookup
+            const uv = latLonToUV(city.lat, city.lon);
+            const key = `${Math.floor(uv.u * aqiCanvas.width)},${Math.floor(uv.v * aqiCanvas.height)}`;
+            locationData[key] = {
+              name: `${city.name}, ${city.country}`,
+              lat: city.lat,
+              lon: city.lon,
+              aqi: aqi
+            };
+            
+            return { city, aqi };
+          })
+          .catch(error => {
+            console.error(`Error fetching AQI for ${city.name}:`, error);
+            return { city, aqi: 1 }; // Default to "Good" if there's an error
+          });
+      });
+
+      return Promise.all(requests);
+    }
+
+    // Generate AQI Heatmap texture based on real data
+    function generateAQIHeatmap(aqiPoints) {
+      aqiCanvas = document.createElement('canvas');
+      aqiCanvas.width = 2048;
+      aqiCanvas.height = 1024;
+      aqiCtx = aqiCanvas.getContext('2d');
+
+      // Clear canvas with transparent background
+      aqiCtx.fillStyle = 'rgba(0, 0, 0, 0)';
+      aqiCtx.fillRect(0, 0, aqiCanvas.width, aqiCanvas.height);
+
+      // For each point of real AQI data, create a gradient
+      aqiPoints.forEach(({ city, aqi }) => {
+        const { u, v } = latLonToUV(city.lat, city.lon);
+        const x = u * aqiCanvas.width;
+        const y = v * aqiCanvas.height;
+        
+        // Determine fill color based on AQI value
+        let color;
+        const radius = 80; // radius of influence
+        
+        if (aqi === 1) {
+          color = 'rgba(0, 228, 0, 0.7)';        // Good
+        } else if (aqi === 2) {
+          color = 'rgba(255, 255, 0, 0.7)';      // Moderate
+        } else if (aqi === 3) {
+          color = 'rgba(255, 126, 0, 0.7)';      // Unhealthy for Sensitive Groups
+        } else if (aqi === 4) {
+          color = 'rgba(255, 0, 0, 0.7)';        // Unhealthy
+        } else if (aqi === 5) {
+          color = 'rgba(143, 63, 151, 0.7)';     // Very Unhealthy
+        } else {
+          color = 'rgba(126, 0, 35, 0.7)';       // Hazardous (fallback)
+        }
+        
+        // Create a radial gradient for the AQI point
+        const gradient = aqiCtx.createRadialGradient(x, y, 0, x, y, radius);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        
+        aqiCtx.fillStyle = gradient;
+        aqiCtx.beginPath();
+        aqiCtx.arc(x, y, radius, 0, Math.PI * 2);
+        aqiCtx.fill();
+      });
+
+      // Fill areas without specific data points with a base level
+      for (let i = 0; i < aqiCanvas.width; i += 10) {
+        for (let j = 0; j < aqiCanvas.height; j += 10) {
+          const imageData = aqiCtx.getImageData(i, j, 1, 1).data;
+          // If this pixel is transparent (no data point nearby)
+          if (imageData[3] === 0) {
+            // Add a light baseline value (Good to Moderate)
+            const baseAQI = 1 + Math.floor(Math.random() * 2); // 1 or 2
+            let color;
+            if (baseAQI === 1) {
+              color = 'rgba(0, 228, 0, 0.3)';  // Light Good
+            } else {
+              color = 'rgba(255, 255, 0, 0.3)'; // Light Moderate
+            }
+            aqiCtx.fillStyle = color;
+            aqiCtx.fillRect(i, j, 10, 10);
+          }
+        }
+      }
+
+      return new THREE.CanvasTexture(aqiCanvas);
+    }
+
+    // Initialize AQI Layer with a loading texture
+    const aqiGeometry = new THREE.SphereGeometry(2.01, 64, 64);
+    const tempMaterial = new THREE.MeshPhongMaterial({
+      transparent: true,
+      opacity: 0.5,
+      color: 0x00ff00
+    });
+    const aqiLayer = new THREE.Mesh(aqiGeometry, tempMaterial);
+    aqiLayer.name = 'aqiLayer';
+    scene.add(aqiLayer);
+
+    // Add stars in the background
+    const starGeometry = new THREE.BufferGeometry();
+    const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.1 });
+    const starVertices = [];
+    for (let i = 0; i < 10000; i++) {
+      const x = (Math.random() - 0.5) * 2000;
+      const y = (Math.random() - 0.5) * 2000;
+      const z = (Math.random() - 0.5) * 2000;
+      starVertices.push(x, y, z);
+    }
+    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
+
+    // Position camera
+    camera.position.z = 5;
+
+    // Controls for rotation
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+    const rotationSpeed = 0.003;
+    let autoRotate = true;
+
+    document.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      previousMousePosition = { x: e.clientX, y: e.clientY };
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const deltaX = e.clientX - previousMousePosition.x;
+        const deltaY = e.clientY - previousMousePosition.y;
+        earth.rotation.y += deltaX * 0.005;
+        earth.rotation.x += deltaY * 0.005;
+        // Sync rotation of AQI layer with Earth
+        aqiLayer.rotation.y = earth.rotation.y;
+        aqiLayer.rotation.x = earth.rotation.x;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      }
+    });
+    document.addEventListener('mouseup', () => { isDragging = false; });
+    document.addEventListener('wheel', (e) => {
+      if (camera.position.z > 3 && e.deltaY < 0) {
+        camera.position.z -= 0.3;
+      } else if (camera.position.z < 10 && e.deltaY > 0) {
+        camera.position.z += 0.3;
+      }
+    });
+
+    // Toggle button functionality
+    document.getElementById('toggleAQI').addEventListener('click', function() {
+      aqiLayer.visible = !aqiLayer.visible;
+      this.classList.toggle('active');
+    });
+    document.getElementById('toggleAutoRotate').addEventListener('click', function() {
+      autoRotate = !autoRotate;
+      this.classList.toggle('active');
+    });
+
+    // Raycaster for globe click to get location and AQI info
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    renderer.domElement.addEventListener('click', onGlobeClick, false);
+
+    function getAQICategoryFromValue(aqi) {
+      switch(aqi) {
+        case 1: return 'Good (0-50)';
+        case 2: return 'Moderate (51-100)';
+        case 3: return 'Unhealthy for Sensitive Groups (101-150)';
+        case 4: return 'Unhealthy (151-200)';
+        case 5: return 'Very Unhealthy (201-300)';
+        default: return 'Unknown';
+      }
+    }
+
+    function onGlobeClick(event) {
+      // Get normalized mouse coordinates
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObject(earth);
+      if (intersects.length > 0) {
+        // Intersection point on the Earth
+        const point = intersects[0].point.clone().normalize();
+        // Calculate latitude and longitude (in degrees)
+        const lat = Math.asin(point.y) * (180 / Math.PI);
+        const lon = Math.atan2(point.z, point.x) * (180 / Math.PI);
+        // Calculate texture coordinates (u, v)
+        const u = 0.5 + (Math.atan2(point.z, point.x)) / (2 * Math.PI);
+        const v = 0.5 - (Math.asin(point.y)) / Math.PI;
+
+        // Get pixel data from the AQI canvas for this location
+        let aqiCategory = 'Unknown';
+        let locationName = 'Unknown Location';
+        
+        if (aqiCanvas && aqiCtx) {
+          const x = Math.floor(u * aqiCanvas.width);
+          const y = Math.floor(v * aqiCanvas.height);
+          
+          // Check if we have location data for this point
+          const locationKey = `${x},${y}`;
+          if (locationData[locationKey]) {
+            locationName = locationData[locationKey].name;
+            aqiCategory = getAQICategoryFromValue(locationData[locationKey].aqi);
+          } else {
+            // Find nearest location
+            let minDist = Infinity;
+            let closestLocation = null;
+            
+            for (const [key, loc] of Object.entries(locationData)) {
+              const [lx, ly] = key.split(',').map(Number);
+              const dist = Math.sqrt(Math.pow(x - lx, 2) + Math.pow(y - ly, 2));
+              if (dist < minDist && dist < 100) { // Within reasonable distance
+                minDist = dist;
+                closestLocation = loc;
+              }
+            }
+            
+            if (closestLocation) {
+              locationName = `Near ${closestLocation.name}`;
+              aqiCategory = getAQICategoryFromValue(closestLocation.aqi);
+            } else {
+              // For areas without known data, sample from the heatmap
+              const pixel = aqiCtx.getImageData(x, y, 1, 1).data; // [r, g, b, a]
+              if (pixel[0] === 0 && pixel[1] === 228) {
+                aqiCategory = 'Good (0-50)';
+              } else if (pixel[0] === 255 && pixel[1] === 255 && pixel[2] === 0) {
+                aqiCategory = 'Moderate (51-100)';
+              } else if (pixel[0] === 255 && pixel[1] === 126 && pixel[2] === 0) {
+                aqiCategory = 'Unhealthy for Sensitive Groups (101-150)';
+              } else if (pixel[0] === 255 && pixel[1] === 0 && pixel[2] === 0) {
+                aqiCategory = 'Unhealthy (151-200)';
+              } else if (pixel[0] === 143 && pixel[1] === 63 && pixel[2] === 151) {
+                aqiCategory = 'Very Unhealthy (201-300)';
+              } else if (pixel[0] === 126 && pixel[1] === 0 && pixel[2] === 35) {
+                aqiCategory = 'Hazardous (301+)';
+              }
+            }
+          }
+        }
+        // Update the info box with location and AQI details
+        document.querySelector('.info').innerHTML = `
+          <p><strong>Location:</strong> ${locationName}</p>
+          <p><strong>Coordinates:</strong> Lat ${lat.toFixed(2)}°, Lon ${lon.toFixed(2)}°</p>
+          <p><strong>AQI Category:</strong> ${aqiCategory}</p>
+          <p>(Drag to rotate | Scroll to zoom)</p>
+        `;
+      }
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      if (autoRotate) {
+        earth.rotation.y += rotationSpeed;
+        // Ensure AQI layer follows Earth's rotation
+        aqiLayer.rotation.y = earth.rotation.y;
+        aqiLayer.rotation.x = earth.rotation.x;
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Initialize with real AQI data
+    (async () => {
+      try {
+        const aqiPoints = await fetchAQIData();
+        const texture = generateAQIHeatmap(aqiPoints);
+        aqiLayer.material = new THREE.MeshPhongMaterial({
+          map: texture,
+          transparent: true,
+          opacity: 0.8
+        });
+        
+        // Hide loading indicator
+        document.getElementById('loadingIndicator').style.display = 'none';
+      } catch (error) {
+        console.error("Error initializing AQI data:", error);
+        document.getElementById('loadingIndicator').innerHTML = 'Error loading AQI data. Please refresh.';
+      }
+    })();
+  </script>
+</body>
+</html>

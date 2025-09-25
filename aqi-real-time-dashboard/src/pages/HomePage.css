@@ -1,0 +1,40 @@
+/* HomePage.css */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* background-color: #f7fafc; */
+  color: #1a202c;
+}
+
+.app.dark-mode {
+  background-color: #1a202c;
+  color: #f7fafc;
+}
+
+.content-container {
+  flex: 1;
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.full-width-map {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+/* Media query for larger screens */
+@media (min-width: 1200px) {
+  .full-width-map {
+    padding: 1rem 2rem;
+  }
+}
+
+/* Ensure the map doesn't get too small on mobile */
+@media (max-width: 640px) {
+  .full-width-map {
+    padding: 0.5rem;
+  }
+}
